@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="#2563eb"/>
+  
+  <!-- Stylized "P" representing Portmile (also truck-inspired) -->
+  <g transform="translate(256, 256)">
+    <!-- Main P shape -->
+    <path d="M -80 -120 L -80 120 L -40 120 L -40 -20 L 0 -20 C 40 -20 60 0 60 30 C 60 60 40 80 0 80 L -40 80 L -40 120 L 0 120 C 80 120 120 80 120 30 C 120 -20 80 -120 0 -120 Z" 
+          fill="white" stroke="none"/>
+    
+    <!-- Truck wheels accent (two small circles at bottom) -->
+    <circle cx="-50" cy="140" r="15" fill="#fbbf24"/>
+    <circle cx="50" cy="140" r="15" fill="#fbbf24"/>
+  </g>
+</svg>

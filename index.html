@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portmile - Cargo Tracking & Logistics</title>
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-white">
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <img src="assets/icons/portmile-logo.svg" alt="Portmile Logo" class="w-8 h-8">
+                    <span class="text-sm text-gray-600">Powered by Bipin Transport</span>
+                </div>
+                
+                <!-- Menu -->
+                <div class="hidden md:flex items-center gap-8" id="navMenu">
+                    <!-- Will be populated by script.js from CONFIG.navigation -->
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gradient-to-r from-blue-600 to-blue-500 text-white py-24 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 600%22><path d=%22M0,300 Q300,200 600,300 T1200,300%22 stroke=%22white%22 fill=%22none%22 stroke-width=%223%22/></svg>')"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex items-center gap-3 mb-6 w-fit bg-blue-500 bg-opacity-50 px-4 py-2 rounded-full">
+                <svg class="w-4 h-4" fill="white" viewBox="0 0 20 20">
+                    <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1 4.5 4.5 0 11-4.814 6.98z"/>
+                </svg>
+                <span class="text-sm">Specializing in Wind Energy Logistics</span>
+            </div>
+            
+            <h1 class="text-5xl font-bold mb-6 leading-tight">
+                Moving the Future of Energy
+            </h1>
+            
+            <p class="text-lg mb-8 text-blue-100 max-w-2xl">
+                Expert logistics for renewable energy infrastructure. From wind turbine blades to heavy industrial cargo, we deliver with precision across India.
+            </p>
+            
+            <div class="flex gap-4">
+                <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition flex items-center gap-2">
+                    Track Your Shipment
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Industries Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-4">Specialized Logistics for Heavy & Renewable Cargo</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl">Portmile, powered by Bipin Transport's decades of expertise, focuses on the renewable energy sector with specialized capabilities in transporting wind turbine components, heavy machinery, and over-dimensional cargo.</p>
+            
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold mb-6">Key Industries</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="flex items-center gap-3 bg-blue-100 px-4 py-3 rounded-lg">
+                        <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6-4a2 2 0 100-4 2 2 0 000 4z"/>
+                        </svg>
+                        <span class="font-medium text-gray-900">Renewable Energy</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-blue-100 px-4 py-3 rounded-lg">
+                        <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.5 1.5H5.75A2.25 2.25 0 003.5 3.75v12.5A2.25 2.25 0 005.75 18.5h8.5a2.25 2.25 0 002.25-2.25V8M10.5 1.5v5.25h5.25M10.5 11h4m-4 2.5h4"/>
+                        </svg>
+                        <span class="font-medium text-gray-900">Automotive & Engineering</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-blue-100 px-4 py-3 rounded-lg">
+                        <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M8 2a1 1 0 000 2h.01a1 1 0 000-2H8zm0 4a1 1 0 000 2h.01a1 1 0 000-2H8zm0 4a1 1 0 000 2h.01a1 1 0 000-2H8zm0 4a1 1 0 000 2h.01a1 1 0 000-2H8zm4-14a1 1 0 000 2h.01a1 1 0 000-2h-.01zm0 4a1 1 0 000 2h.01a1 1 0 000-2h-.01zm0 4a1 1 0 000 2h.01a1 1 0 000-2h-.01zm0 4a1 1 0 000 2h.01a1 1 0 000-2h-.01z"/>
+                        </svg>
+                        <span class="font-medium text-gray-900">Chemical & Petrochemical</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-blue-100 px-4 py-3 rounded-lg">
+                        <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 11.894 1.789l-1.33.665 2.331 2.331a1 1 0 11-1.414 1.414L15.88 9.07l1.33.665a1 1 0 11-.894 1.789l-1.599-.8-3.954 1.582V17a1 1 0 11-2 0v-1.323l-3.954-1.582-1.599.8a1 1 0 11-.894-1.789l1.33-.665-2.331-2.331a1 1 0 111.414-1.414L4.12 10.93l-1.33-.665a1 1 0 11.894-1.789l1.599.8 3.954-1.582V3a1 1 0 011-1z"/>
+                        </svg>
+                        <span class="font-medium text-gray-900">Heavy Industries</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-2xl font-bold mb-6">Our Capabilities</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white p-6 rounded-lg border border-blue-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-gray-900">Full Truck Load (FTL)</h4>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-blue-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-gray-900">Import-Export Containers (20FT/40FT)</h4>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-blue-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 6H6.28l-.31-1.243A1 1 0 005 4H3z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-gray-900">Over Dimensional Cargo (ODC)</h4>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-blue-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V5a1 1 0 10-2 0v2.586L8.707 7.293z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-gray-900">Heavy Lift Cargo (5+ Tons)</h4>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-blue-100 hover:shadow-lg transition">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-bold text-gray-900">Project Transportation</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services/Work Section -->
+    <section id="work" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Our Work in Action</h2>
+                <p class="text-gray-600 text-lg">Delivering specialized cargo across diverse industries with precision and care</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Service Card 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-4xl font-bold">
+                        ⚡
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-3">Renewable Energy</span>
+                        <h3 class="text-xl font-bold mb-2">Wind Turbine Blade Transport</h3>
+                        <p class="text-gray-600">ODC transport of 60+ meter wind turbine blades across challenging terrain</p>
+                    </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="h-48 bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-white text-4xl font-bold">
+                        🏭
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-3">Manufacturing</span>
+                        <h3 class="text-xl font-bold mb-2">Heavy Industrial Machinery</h3>
+                        <p class="text-gray-600">Heavy lift operations for factory equipment and industrial gearboxes</p>
+                    </div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="h-48 bg-gradient-to-br from-gray-800 to-black flex items-center justify-center text-white text-4xl font-bold">
+                        🏗️
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-3">Chemical & Petrochemical</span>
+                        <h3 class="text-xl font-bold mb-2">Chemical Plant Equipment</h3>
+                        <p class="text-gray-600">Specialized handling of chemical processing equipment and storage tanks</p>
+                    </div>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="h-48 bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center text-white text-4xl font-bold">
+                        🚗
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-3">Automotive</span>
+                        <h3 class="text-xl font-bold mb-2">Automotive Components Transport</h3>
+                        <p class="text-gray-600">Manufacturing equipment and assembly line machinery for automotive sector</p>
+                    </div>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-4xl font-bold">
+                        📦
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-3">Import-Export</span>
+                        <h3 class="text-xl font-bold mb-2">Container Logistics</h3>
+                        <p class="text-gray-600">20FT and 40FT container transport with full tracking capabilities</p>
+                    </div>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition">
+                    <div class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white text-4xl font-bold">
+                        🚚
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold mb-3">ODC Transport</span>
+                        <h3 class="text-xl font-bold mb-2">Heavy Haul Operations</h3>
+                        <p class="text-gray-600">Over-dimensional cargo transport with specialized permits and routing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Track Shipment Section -->
+    <section id="track" class="py-20 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Track Your Shipment</h2>
+                <p class="text-gray-600 text-lg">Enter your tracking ID to get real-time updates on your cargo</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="flex gap-3 mb-4">
+                    <input 
+                        type="text" 
+                        id="trackingInput"
+                        placeholder="Enter Tracking ID (e.g., PM2024001)"
+                        class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                    >
+                    <button id="trackBtn" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        Track
+                    </button>
+                </div>
+                
+                <p class="text-sm text-gray-500">Demo IDs: PM2024001 (In Transit), PM2024002 (Delivered)</p>
+                
+                <!-- Tracking Results -->
+                <div id="trackingResults" class="mt-8 hidden">
+                    <div id="trackingStatus" class="mb-6"></div>
+                    <div id="trackingTimeline" class="border-l-4 border-blue-600 pl-6"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Get in Touch With Us</h2>
+                <p class="text-gray-600 text-lg">Have questions about our services? We're here to help. Reach out to us using any of the methods below.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- WhatsApp Card -->
+                <a href="javascript:void(0)" 
+                   data-config="whatsapp-link"
+                   target="_blank"
+                   class="group bg-white rounded-xl p-8 shadow-lg hover:shadow-xl hover:scale-105 transition transform border border-green-100">
+                    <div class="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 group-hover:bg-green-500 transition">
+                        <svg class="w-8 h-8 text-green-600 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.951 1.263.978.978 0 00-.399 1.33c.176.308.549.527.913.569 1.321.155 2.641-.379 3.887-1.29.232-.172.443-.357.648-.552.273-.25.536-.516.788-.789.098-.1.188-.205.273-.318a.977.977 0 00.063-1.21.978.978 0 00-1.219-.063zM12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 text-center mb-2">WhatsApp</h3>
+                    <p class="text-gray-600 text-center text-sm">Chat with us instantly on WhatsApp</p>
+                    <p class="text-green-600 font-semibold text-center mt-3" data-config="whatsapp-display">${PHONE_NUMBER}</p>
+                </a>
+
+                <!-- Email Card -->
+                <a href="javascript:void(0)"
+                   data-config="email-link"
+                   class="group bg-white rounded-xl p-8 shadow-lg hover:shadow-xl hover:scale-105 transition transform border border-blue-100">
+                    <div class="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mx-auto mb-4 group-hover:bg-blue-600 transition">
+                        <svg class="w-8 h-8 text-blue-600 group-hover:text-white transition" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Email</h3>
+                    <p class="text-gray-600 text-center text-sm">Send us an email with your inquiry</p>
+                    <p class="text-blue-600 font-semibold text-center mt-3" data-config="email-display">${EMAIL_ADDRESS}</p>
+                </a>
+
+                <!-- Phone Card -->
+                <a href="javascript:void(0)"
+                   data-config="phone-link"
+                   class="group bg-white rounded-xl p-8 shadow-lg hover:shadow-xl hover:scale-105 transition transform border border-purple-100">
+                    <div class="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mx-auto mb-4 group-hover:bg-purple-600 transition">
+                        <svg class="w-8 h-8 text-purple-600 group-hover:text-white transition" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.8c.164.99.738 2.946 1.959 4.167l-2.332 2.332c-.604-.604-1.42-1.551-1.921-2.721C5.09 6.75 5 5.468 5 4a2 2 0 012-2h2m0 0a1 1 0 001-1V2a1 1 0 10-2 0v1a1 1 0 001 1h2m9-1a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1h-2a1 1 0 01-1-1V2a1 1 0 112 0v1a1 1 0 001 1h2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 text-center mb-2">Phone Call</h3>
+                    <p class="text-gray-600 text-center text-sm">Give us a call during business hours</p>
+                    <p class="text-purple-600 font-semibold text-center mt-3" data-config="phone-display">${PHONE_NUMBER}</p>
+                </a>
+            </div>
+
+            <!-- Contact Details Box -->
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-8 border border-blue-200">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Email Address</p>
+                        <p class="font-semibold text-gray-900" data-config="email-display">${EMAIL_ADDRESS}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Phone Number</p>
+                        <p class="font-semibold text-gray-900" data-config="phone-display">${PHONE_NUMBER}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Service Location</p>
+                        <p class="font-semibold text-gray-900">Across India</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Company</p>
+                        <p class="font-semibold text-gray-900">Bipin Transport</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted Partner Section -->
+    <section class="bg-blue-600 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-2xl">
+                <h3 class="text-3xl font-bold mb-4">Trusted Partner</h3>
+                <p class="text-blue-100">Working with government projects, pharmaceutical companies, and leading renewable energy developers across India.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                <!-- Portmile Info -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Portmile</h3>
+                    <p class="text-gray-400 mb-4">Specialized logistics solutions for renewable energy and heavy cargo transportation.</p>
+                    <p class="text-gray-500 text-sm">A division of Bipin Transport</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#work" class="text-gray-400 hover:text-white transition">Our Work</a></li>
+                        <li><a href="#track" class="text-gray-400 hover:text-white transition">Track Shipment</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                            </svg>
+                            <span class="text-gray-400" data-config="email-display">info@portmile.com</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.8c.164.99.738 2.946 1.959 4.167l-2.332 2.332c-.604-.604-1.42-1.551-1.921-2.721C5.09 6.75 5 5.468 5 4a2 2 0 012-2h2m0 0a1 1 0 001-1V2a1 1 0 10-2 0v1a1 1 0 001 1h2m9-1a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1h-2a1 1 0 01-1-1V2a1 1 0 112 0v1a1 1 0 001 1h2z"/>
+                            </svg>
+                            <span class="text-gray-400" data-config="phone-display">+91 123 456 7890</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-400">India</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>© 2026 Portmile. All rights reserved. Powered by Bipin Transport.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load config first, then the main script -->
+    <script src="src/js/config.js"></script>
+    <script src="src/js/script.js"></script>
+</body>
+</html>
