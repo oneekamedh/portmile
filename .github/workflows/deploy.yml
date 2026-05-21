@@ -19,6 +19,7 @@ jobs:
         run: |
           sed -i "s|YOUR_GOOGLE_APPS_SCRIPT_URL_HERE|${{ secrets.GOOGLE_SCRIPT_URL }}|g" index.html
           echo "Replaced placeholder with Google Script URL"
+          echo ${{ secrets.GOOGLE_SCRIPT_URL }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
