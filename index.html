@@ -529,23 +529,24 @@
         <p class="sec-sub reveal">Tell us about your project. We'll respond within 24 hours with a route assessment and
           indicative quote.</p>
         <div class="contact-layout">
-          <form class="contact-form reveal" name="contact-form" onsubmit="handleSubmit(event)">
+          <form class="contact-form reveal" name="contact-form" onsubmit="handleSubmit(event)" novalidate>
             <!-- Honeypot field for spam protection -->
             <input type="text" name="b_check_field" style="display:none" tabindex="-1" autocomplete="off">
             <div class="form-row">
-              <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required="">
+              <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required minlength="2" data-error="Please enter at least 2 characters"><span class="field-error"></span>
               </div>
-              <div class="form-group"><label>Company</label><input type="text" name="company" placeholder="Company name" required="">
+              <div class="form-group"><label>Company</label><input type="text" name="company" placeholder="Company name" required minlength="2" data-error="Please enter at least 2 characters"><span class="field-error"></span>
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required pattern="[0-9+\s-]{10,}" title="Please enter a valid phone number">
+              <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required pattern="[0-9+\s-]{10,}" data-error="Please enter a valid phone number (only numbers, +, spaces, dashes)"><span class="field-error"></span>
               </div>
-              <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@company.com" required></div>
+              <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@company.com" required data-error="Please enter a valid email address"><span class="field-error"></span>
+              </div>
             </div>
             <div class="form-group"><label>What are you moving?</label>
-              <select name="cargoType" required="">
-                <option value="" disabled="" selected="">Select cargo type</option>
+              <select name="cargoType" required data-error="Please select a cargo type"><span class="field-error"></span>
+                <option value="" disabled selected>Select cargo type</option>
                 <option>Wind turbine tower sections</option>
                 <option>Nacelle / turbine components</option>
                 <option>Transformer / substation equipment</option>
@@ -554,10 +555,10 @@
               </select>
             </div>
             <div class="form-row">
-              <div class="form-group"><label>From (Origin)</label><input type="text" name="origin"
-                  placeholder="Factory / port location"></div>
-              <div class="form-group"><label>To (Destination)</label><input type="text" name="destination"
-                  placeholder="Wind farm / project site"></div>
+              <div class="form-group"><label>From (Origin)</label><input type="text" name="origin" placeholder="Factory / port location" minlength="3" data-error="Please enter at least 3 characters"><span class="field-error"></span>
+              </div>
+              <div class="form-group"><label>To (Destination)</label><input type="text" name="destination" placeholder="Wind farm / project site" minlength="3" data-error="Please enter at least 3 characters"><span class="field-error"></span>
+              </div>
             </div>
             <div class="form-group"><label>Project details (optional)</label><textarea name="details" rows="3"
                 placeholder="Cargo dimensions, timeline, specific requirements..."></textarea></div>
@@ -640,10 +641,84 @@
     }
     initReveals();
 
+    // Form validation
+    function validateField(field) {
+      const errorSpan = field.parentElement.querySelector('.field-error');
+      const customError = field.dataset.error;
+      
+      if (field.validity.valid) {
+        field.classList.add('valid');
+        field.classList.remove('invalid');
+        if (errorSpan) errorSpan.textContent = '';
+        return true;
+      } else {
+        field.classList.remove('valid');
+        field.classList.add('invalid');
+        if (errorSpan) {
+          if (field.validity.valueMissing) {
+            errorSpan.textContent = 'This field is required';
+          } else if (field.validity.tooShort) {
+            errorSpan.textContent = `Minimum ${field.minLength} characters required`;
+          } else if (field.validity.patternMismatch) {
+            errorSpan.textContent = customError || 'Invalid format';
+          } else if (field.validity.typeMismatch) {
+            errorSpan.textContent = customError || 'Invalid format';
+          } else {
+            errorSpan.textContent = customError || 'Invalid value';
+          }
+        }
+        return false;
+      }
+    }
+
+    // Restrict phone field to only allow numbers, +, spaces, dashes
+    const phoneField = document.querySelector('.contact-form input[name="phone"]');
+    if (phoneField) {
+      phoneField.addEventListener('input', () => {
+        phoneField.value = phoneField.value.replace(/[^0-9+\s-]/g, '');
+      });
+    }
+
+    // Add validation on blur for all form fields
+    document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea').forEach(field => {
+      field.addEventListener('blur', () => {
+        if (field.value) {
+          validateField(field);
+        }
+      });
+      
+      field.addEventListener('input', () => {
+        if (field.classList.contains('invalid')) {
+          validateField(field);
+        }
+      });
+    });
+
     // Form
     window.handleSubmit = function (e) {
       e.preventDefault();
       const form = e.target;
+      
+      // Validate all fields
+      let isValid = true;
+      const fields = form.querySelectorAll('input[required], select[required], textarea[required]');
+      fields.forEach(field => {
+        if (!validateField(field)) {
+          isValid = false;
+        }
+      });
+      
+      // Also validate optional fields that have values
+      form.querySelectorAll('input:not([required]), select:not([required]), textarea:not([required])').forEach(field => {
+        if (field.value && !validateField(field)) {
+          isValid = false;
+        }
+      });
+      
+      if (!isValid) {
+        return;
+      }
+      
       const formData = new FormData(form);
       const msg = e.target.closest('section').querySelector('[id$="form-msg"]');
       const errorMsg = e.target.closest('section').querySelector('[id$="form-error"]');
@@ -659,7 +734,6 @@
       // Replace with your Google Apps Script URL
       const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
-      // Validate that the URL has been replaced from placeholder
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
 
@@ -686,6 +760,8 @@
         if (data.result === 'success') {
           if (msg) msg.style.display = 'block';
           form.reset();
+          // Remove valid classes after reset
+          form.querySelectorAll('.valid').forEach(el => el.classList.remove('valid'));
         } else {
           throw new Error(data.error || 'Submission failed');
         }
