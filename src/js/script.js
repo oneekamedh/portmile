@@ -69,12 +69,16 @@ function renderCapabilities() {
 
 // Render Contact Information from CONFIG
 function renderContactInfo() {
-    // Replace template variables in HTML with actual values from config
-    const htmlContent = document.documentElement.innerHTML;
-    const updatedContent = htmlContent
-        .replace(/\$\{PHONE_NUMBER\}/g, CONFIG.contact.phone)
-        .replace(/\$\{EMAIL_ADDRESS\}/g, CONFIG.contact.email);
-    document.documentElement.innerHTML = updatedContent;
+    // Replace template variables in text nodes to avoid destroying DOM events
+    const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    while (node = walk.nextNode()) {
+        if (node.nodeValue.includes('${PHONE_NUMBER}') || node.nodeValue.includes('${EMAIL_ADDRESS}')) {
+            node.nodeValue = node.nodeValue
+                .replace(/\$\{PHONE_NUMBER\}/g, CONFIG.contact.phone)
+                .replace(/\$\{EMAIL_ADDRESS\}/g, CONFIG.contact.email);
+        }
+    }
     
     // Update WhatsApp link
     const whatsappLink = document.querySelector('[data-config="whatsapp-link"]');
@@ -116,54 +120,56 @@ function renderContactInfo() {
 function createContactModal() {
     const modal = document.createElement('div');
     modal.id = 'contactModal';
-    modal.className = 'hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center';
+    modal.className = 'hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 backdrop-blur-sm';
     
     modal.innerHTML = `
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-900">Contact Us</h2>
-                <button class="closeModal text-gray-500 hover:text-gray-900 text-2xl">×</button>
+        <div class="bg-white rounded-3xl p-12 max-w-3xl w-full shadow-2xl" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.15);">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-900">Contact Us</h2>
+                <button class="closeModal text-gray-400 hover:text-gray-600 text-4xl font-light transition">×</button>
             </div>
             
-            <div class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- WhatsApp Button -->
                 <a href="https://wa.me/${CONFIG.contact.whatsappNumber}?text=Hello%20Portmile%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services" 
                    target="_blank" 
-                   class="flex items-center gap-3 w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.951 1.263.978.978 0 00-.399 1.33c.176.308.549.527.913.569 1.321.155 2.641-.379 3.887-1.29.232-.172.443-.357.648-.552.273-.25.536-.516.788-.789.098-.1.188-.205.273-.318a.977.977 0 00.063-1.21.978.978 0 00-1.219-.063zM12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z"/>
-                    </svg>
-                    <span>Chat on WhatsApp</span>
+                   class="group flex flex-col items-center justify-center p-6 bg-green-50 hover:bg-green-100 rounded-2xl border-0 transition transform hover:scale-105 cursor-pointer shadow-md hover:shadow-lg">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-4 group-hover:shadow-lg transition transform group-hover:scale-110">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.951 1.263.978.978 0 00-.399 1.33c.176.308.549.527.913.569 1.321.155 2.641-.379 3.887-1.29.232-.172.443-.357.648-.552.273-.25.536-.516.788-.789.098-.1.188-.205.273-.318a.977.977 0 00.063-1.21.978.978 0 00-1.219-.063zM12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-1">WhatsApp</h3>
+                    <p class="text-xs text-gray-500 text-center mb-2">Chat with us</p>
+                    <p class="font-semibold text-green-600 text-sm text-center">${CONFIG.contact.phone}</p>
                 </a>
                 
                 <!-- Email Button -->
                 <a href="mailto:${CONFIG.contact.email}?subject=Inquiry%20about%20Portmile%20Services&body=Hello%20Portmile%2C%0A%0AI%20would%20like%20to%20inquire%20about%20your%20services." 
-                   class="flex items-center gap-3 w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                    </svg>
-                    <span>Send Email</span>
+                   class="group flex flex-col items-center justify-center p-6 bg-blue-50 hover:bg-blue-100 rounded-2xl border-0 transition transform hover:scale-105 cursor-pointer shadow-md hover:shadow-lg">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4 group-hover:shadow-lg transition transform group-hover:scale-110">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-1">Email</h3>
+                    <p class="text-xs text-gray-500 text-center mb-2">Send message</p>
+                    <p class="font-semibold text-blue-600 text-sm text-center break-all">${CONFIG.contact.email}</p>
                 </a>
                 
                 <!-- Phone Button -->
                 <a href="tel:${CONFIG.contact.phone}" 
-                   class="flex items-center gap-3 w-full bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.8c.164.99.738 2.946 1.959 4.167l-2.332 2.332c-.604-.604-1.42-1.551-1.921-2.721C5.09 6.75 5 5.468 5 4a2 2 0 012-2h2m0 0a1 1 0 001-1V2a1 1 0 10-2 0v1a1 1 0 001 1h2m9-1a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1h-2a1 1 0 01-1-1V2a1 1 0 112 0v1a1 1 0 001 1h2z"/>
-                    </svg>
-                    <span>Call Us</span>
+                   class="group flex flex-col items-center justify-center p-6 bg-purple-50 hover:bg-purple-100 rounded-2xl border-0 transition transform hover:scale-105 cursor-pointer shadow-md hover:shadow-lg">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mb-4 group-hover:shadow-lg transition transform group-hover:scale-110">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.8c.164.99.738 2.946 1.959 4.167l-2.332 2.332c-.604-.604-1.42-1.551-1.921-2.721C5.09 6.75 5 5.468 5 4a2 2 0 012-2h2m0 0a1 1 0 001-1V2a1 1 0 10-2 0v1a1 1 0 001 1h2m9-1a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1h-2a1 1 0 01-1-1V2a1 1 0 112 0v1a1 1 0 001 1h2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-1">Phone</h3>
+                    <p class="text-xs text-gray-500 text-center mb-2">Call us now</p>
+                    <p class="font-semibold text-purple-600 text-sm text-center">${CONFIG.contact.phone}</p>
                 </a>
-            </div>
-            
-            <!-- Contact Details -->
-            <div class="mt-6 pt-6 border-t border-gray-200">
-                <h3 class="font-semibold text-gray-900 mb-3">Contact Details</h3>
-                <div class="space-y-2 text-sm text-gray-600">
-                    <p><strong>Email:</strong> ${CONFIG.contact.email}</p>
-                    <p><strong>Phone:</strong> ${CONFIG.contact.phone}</p>
-                    <p><strong>Location:</strong> ${CONFIG.contact.location}</p>
-                </div>
             </div>
         </div>
     `;
@@ -194,23 +200,14 @@ window.addEventListener('DOMContentLoaded', () => {
     // Create and setup contact modal
     const contactModal = createContactModal();
     
-    // Create floating contact button
-    const floatingButton = document.createElement('button');
-    floatingButton.id = 'floatingContactBtn';
-    floatingButton.className = 'fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg z-40 transition transform hover:scale-110';
-    floatingButton.innerHTML = `
-        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.8c.164.99.738 2.946 1.959 4.167l-2.332 2.332c-.604-.604-1.42-1.551-1.921-2.721C5.09 6.75 5 5.468 5 4a2 2 0 012-2h2m0 0a1 1 0 001-1V2a1 1 0 10-2 0v1a1 1 0 001 1h2m9-1a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1h-2a1 1 0 01-1-1V2a1 1 0 112 0v1a1 1 0 001 1h2z"/>
-        </svg>
-    `;
-    floatingButton.title = 'Contact Us';
-    document.body.appendChild(floatingButton);
-    
-    // Add click handler to floating button
-    floatingButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        contactModal.classList.toggle('hidden');
-    });
+    // Setup floating contact button
+    const floatingBtn = document.getElementById('floatingContactBtn');
+    if (floatingBtn) {
+        floatingBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            contactModal.classList.remove('hidden');
+        });
+    }
 });
 
 // DOM Elements
@@ -222,15 +219,20 @@ const trackingTimeline = document.getElementById('trackingTimeline');
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 
 // ============== TRACKING FUNCTIONALITY ==============
-trackBtn.addEventListener('click', handleTracking);
+if (trackBtn) {
+    trackBtn.addEventListener('click', handleTracking);
+}
 
-trackingInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        handleTracking();
-    }
-});
+if (trackingInput) {
+    trackingInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleTracking();
+        }
+    });
+}
 
 function handleTracking() {
+    if (!trackingInput) return;
     const trackingId = trackingInput.value.trim().toUpperCase();
     
     if (!trackingId) {
@@ -291,7 +293,7 @@ function displayTrackingResults(trackingId) {
         </div>
     `;
     
-    trackingStatus.innerHTML = statusHTML;
+    if (trackingStatus) trackingStatus.innerHTML = statusHTML;
     
     // Display timeline
     const timelineHTML = data.timeline.map((event) => `
@@ -304,11 +306,13 @@ function displayTrackingResults(trackingId) {
         </div>
     `).join('');
     
-    trackingTimeline.innerHTML = timelineHTML;
+    if (trackingTimeline) trackingTimeline.innerHTML = timelineHTML;
     
     // Show results
-    trackingResults.classList.remove('hidden');
-    trackingResults.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (trackingResults) {
+        trackingResults.classList.remove('hidden');
+        trackingResults.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 }
 
 function formatDate(dateString) {
