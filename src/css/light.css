@@ -730,6 +730,10 @@ h2 em {
   text-transform: uppercase
 }
 
+.fleet-card-upcoming {
+  position: relative
+}
+
 /* SERVICES */
 .svc-layout {
   display: grid;
@@ -742,6 +746,38 @@ h2 em {
 .svc-sticky {
   position: sticky;
   top: 120px
+}
+
+.svc-desc {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 380px;
+  margin-bottom: 28px
+}
+
+.svc-notice-box {
+  margin-top: 32px;
+  padding: 20px;
+  background: var(--off);
+  border-left: 2px solid var(--teal)
+}
+
+.svc-notice-label {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+  color: var(--teal);
+  margin-bottom: 8px;
+  text-transform: uppercase
+}
+
+.svc-notice-text {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.6
 }
 
 .svc-list {
@@ -1027,6 +1063,15 @@ h2 em {
   gap: 5px
 }
 
+.dash-live-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--teal-light);
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1.5s infinite
+}
+
 .d-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1059,6 +1104,14 @@ h2 em {
   font-size: 10px;
   color: rgba(255, 255, 255, 0.35);
   margin-top: 2px
+}
+
+.d-cell--route {
+  margin-bottom: 10px
+}
+
+.ds--mt {
+  margin-top: 4px
 }
 
 .prog-bar {
@@ -1149,6 +1202,50 @@ h2 em {
 }
 
 /* CAREERS */
+.careers-highlight {
+  background: var(--navy);
+  padding: 28px;
+  margin-bottom: 16px
+}
+
+.careers-highlight-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--teal-light);
+  margin-bottom: 10px;
+  text-transform: uppercase
+}
+
+.careers-highlight-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+  font-weight: 300
+}
+
+.careers-apply-box {
+  padding: 20px;
+  background: var(--teal-bg);
+  border-left: 2px solid var(--teal)
+}
+
+.careers-apply-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--teal);
+  margin-bottom: 8px;
+  text-transform: uppercase
+}
+
+.careers-apply-text {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.6
+}
+
 .careers-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1429,6 +1526,25 @@ h2 em {
   font-size: 13px;
   color: var(--muted);
   font-weight: 300
+}
+
+.contact-availability {
+  font-weight: 300;
+  font-size: 14px
+}
+
+.form-msg {
+  font-size: 13px;
+  color: var(--teal);
+  margin-top: 8px;
+  display: none
+}
+
+.form-error-msg {
+  font-size: 13px;
+  color: #E8950A;
+  margin-top: 8px;
+  display: none
 }
 
 /* FOOTER */
