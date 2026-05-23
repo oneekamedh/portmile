@@ -25,7 +25,8 @@
     font-family: 'DM Mono', monospace;
     letter-spacing: 1.5px;
     color: var(--teal);
-    margin-bottom: 8px
+    margin-bottom: 8px;
+    text-transform: uppercase
 }
 
 .svc-notice-text {
